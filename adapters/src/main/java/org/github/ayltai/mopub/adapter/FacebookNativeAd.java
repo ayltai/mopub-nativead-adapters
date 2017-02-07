@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -28,6 +29,7 @@ public class FacebookNativeAd extends BaseStaticNativeAd implements AdListener, 
         this.nativeAd = new NativeAd(this.getContext(), adUnitId);
     }
 
+    @CallSuper
     @Override
     public void prepare(@NonNull final View view) {
         super.prepare(view);
@@ -35,6 +37,7 @@ public class FacebookNativeAd extends BaseStaticNativeAd implements AdListener, 
         this.nativeAd.registerViewForInteraction(view);
     }
 
+    @CallSuper
     @Override
     public void clear(@NonNull final View view) {
         super.clear(view);
@@ -42,6 +45,7 @@ public class FacebookNativeAd extends BaseStaticNativeAd implements AdListener, 
         this.nativeAd.unregisterView();
     }
 
+    @CallSuper
     @Override
     public void destroy() {
         super.destroy();

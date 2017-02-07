@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -51,6 +52,7 @@ public class FlurryNativeAd extends BaseStaticNativeAd implements FlurryAdNative
         this.nativeAd = new FlurryAdNative(context, apiKey);
     }
 
+    @CallSuper
     @Override
     public void prepare(@NonNull final View view) {
         super.prepare(view);
@@ -58,6 +60,7 @@ public class FlurryNativeAd extends BaseStaticNativeAd implements FlurryAdNative
         this.nativeAd.setTrackingView(view);
     }
 
+    @CallSuper
     @Override
     public void clear(@NonNull final View view) {
         super.clear(view);
@@ -65,6 +68,7 @@ public class FlurryNativeAd extends BaseStaticNativeAd implements FlurryAdNative
         this.nativeAd.removeTrackingView();
     }
 
+    @CallSuper
     @Override
     public void destroy() {
         super.destroy();

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,7 +22,7 @@ import com.google.android.gms.ads.formats.NativeContentAdView;
 import com.mopub.nativeads.CustomEventNative;
 import com.mopub.nativeads.NativeErrorCode;
 
-public class AdMobNativeAd extends BaseStaticNativeAd implements NativeAppInstallAd.OnAppInstallAdLoadedListener, NativeContentAd.OnContentAdLoadedListener {
+public abstract class AdMobNativeAd extends BaseStaticNativeAd implements NativeAppInstallAd.OnAppInstallAdLoadedListener, NativeContentAd.OnContentAdLoadedListener {
     //region Variables
 
     private final AdRequest.Builder       adRequestBuilder       = new AdRequest.Builder();
@@ -33,26 +34,51 @@ public class AdMobNativeAd extends BaseStaticNativeAd implements NativeAppInstal
 
     //endregion
 
-    public AdMobNativeAd(@NonNull final Context context, @NonNull final CustomEventNative.CustomEventNativeListener customEventNativeListener, @NonNull final String adUnitId) {
+    protected AdMobNativeAd(@NonNull final Context context, @NonNull final CustomEventNative.CustomEventNativeListener customEventNativeListener, @NonNull final String adUnitId) {
         super(context.getApplicationContext(), customEventNativeListener);
 
         this.adUnitId = adUnitId;
     }
 
+    @CallSuper
     @Override
     public void prepare(@NonNull final View view) {
         super.prepare(view);
 
         if (this.nativeAppInstallAd != null && view instanceof NativeAppInstallAdView) {
-            ((NativeAppInstallAdView)view).setNativeAd(this.nativeAppInstallAd);
+            final NativeAppInstallAdView adView = (NativeAppInstallAdView)view;
+
+            this.prepare(adView, this.nativeAppInstallAd);
+
+            adView.setNativeAd(this.nativeAppInstallAd);
 
             this.notifyAdImpressed();
         } else if (this.nativeContentAd != null && view instanceof NativeContentAdView) {
-            ((NativeContentAdView)view).setNativeAd(this.nativeContentAd);
+            final NativeContentAdView adView = (NativeContentAdView)view;
+
+            this.prepare(adView, this.nativeContentAd);
+
+            adView.setNativeAd(this.nativeContentAd);
 
             this.notifyAdImpressed();
         }
     }
+
+    /**
+     * To render ad view properly, implementation is expected to call {@link NativeAppInstallAdView#setHeadlineView(View)}, {@link NativeAppInstallAdView#setBodyView(View)}, {@link NativeAppInstallAdView#setCallToActionView(View)}, {@link NativeAppInstallAdView#setImageView(View)}, {@link NativeAppInstallAdView#setIconView(View)}, and/or {@link NativeAppInstallAdView#setStarRatingView(View)} methods,
+     * and render the ad view text/images using {@link NativeAppInstallAd#getHeadline()}, {@link NativeAppInstallAd#getBody()}, {@link NativeAppInstallAd#getCallToAction()}, {@link NativeAppInstallAd#getImages()}, {@link NativeAppInstallAd#getIcon()}, and/or {@link NativeAppInstallAd#getStarRating()} methods.
+     * @param adView The native ad view to render the ad.
+     * @param nativeAd The native ad instance used to render the ad view.
+     */
+    protected abstract void prepare(@NonNull final NativeAppInstallAdView adView, @NonNull final NativeAppInstallAd nativeAd);
+
+    /**
+     * To render ad view properly, implementation is expected to call {@link NativeContentAdView#setHeadlineView(View)}, {@link NativeContentAdView#setBodyView(View)}, {@link NativeContentAdView#setCallToActionView(View)}, and/or {@link NativeContentAdView#setImageView(View)} methods,
+     * and render the ad view text/images using {@link NativeContentAd#getHeadline()}, {@link NativeContentAd#getBody()}, {@link NativeContentAd#getCallToAction()}, and/or {@link NativeContentAd#getImages()} methods.
+     * @param adView The native ad view to render the ad.
+     * @param nativeAd The native ad instance used to render the ad view.
+     */
+    protected abstract void prepare(@NonNull final NativeContentAdView adView, @NonNull final NativeContentAd nativeAd);
 
     @Override
     public void clear(@NonNull final View view) {
@@ -61,6 +87,7 @@ public class AdMobNativeAd extends BaseStaticNativeAd implements NativeAppInstal
         if (view instanceof NativeAdView) ((NativeAdView)view).destroy();
     }
 
+    @CallSuper
     @Override
     public void destroy() {
         super.destroy();
