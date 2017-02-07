@@ -13,7 +13,11 @@ public class AppLovinEventNative extends BaseEventNative<AppLovinNativeAd> {
         final String apiKey = serverExtras.get(BaseEventNative.KEY_API_KEY);
 
         if (this.validateApiKey(apiKey)) {
-            new AppLovinNativeAd(context, customEventNativeListener, apiKey).fetchAd();
+            final AppLovinNativeAd nativeAd = new AppLovinNativeAd(context, customEventNativeListener, apiKey);
+
+            this.onLoadNativeAd(nativeAd);
+
+            nativeAd.fetchAd();
         } else {
             customEventNativeListener.onNativeAdFailed(NativeErrorCode.NATIVE_ADAPTER_CONFIGURATION_ERROR);
         }

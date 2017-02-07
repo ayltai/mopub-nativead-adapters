@@ -4,23 +4,16 @@ import java.util.Map;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.flurry.android.FlurryAgent;
 import com.mopub.nativeads.NativeErrorCode;
 
-public class FlurryEventNative extends BaseEventNative<FlurryNativeAd> {
+public class FacebookEventNative extends BaseEventNative<FacebookNativeAd> {
     @Override
     protected void loadNativeAd(@NonNull final Context context, @NonNull final CustomEventNativeListener customEventNativeListener, @NonNull final Map<String, Object> localExtras, @NonNull final Map<String, String> serverExtras) {
-        final String apiKey = serverExtras.get(BaseEventNative.KEY_API_KEY);
+        final String adUnitId = serverExtras.get(BaseEventNative.KEY_AD_UNIT_ID);
 
-        if (this.validateApiKey(apiKey)) {
-            new FlurryAgent.Builder()
-                .withLogEnabled(BuildConfig.DEBUG)
-                .withLogLevel(Log.VERBOSE)
-                .build(context, apiKey);
-
-            final FlurryNativeAd nativeAd = new FlurryNativeAd(context, customEventNativeListener, apiKey);
+        if (this.validateAdUnitId(adUnitId)) {
+            final FacebookNativeAd nativeAd = new FacebookNativeAd(context, customEventNativeListener, adUnitId);
 
             this.onLoadNativeAd(nativeAd);
 
@@ -32,10 +25,10 @@ public class FlurryEventNative extends BaseEventNative<FlurryNativeAd> {
 
     /**
      * You may customize ad requests here.
-     * @param nativeAd A {@link FlurryNativeAd} instance to let you customize ad requests.
+     * @param nativeAd A {@link FacebookNativeAd} instance to let you customize ad requests.
      */
     @Override
-    protected void onLoadNativeAd(@NonNull final FlurryNativeAd nativeAd) {
+    protected void onLoadNativeAd(@NonNull final FacebookNativeAd nativeAd) {
         super.onLoadNativeAd(nativeAd);
     }
 }
