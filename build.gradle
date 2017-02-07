@@ -4,8 +4,11 @@ buildscript {
     repositories {
         jcenter()
     }
+
     dependencies {
-        classpath 'com.android.tools.build:gradle:+'
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'me.tatarka:gradle-retrolambda:3.5.0'
+        classpath 'org.standardout:gradle-versioneye-plugin:1.4.0'
     }
 }
 

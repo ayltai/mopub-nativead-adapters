@@ -16,32 +16,50 @@
 #   public *;
 #}
 
--keep class com.flurry.** {
-    *;
+-keepnames class * implements android.os.Parcelable {
+    public static final ** CREATOR;
 }
--dontwarn com.flurry.**
--keepattributes *Annotation*,EnclosingMethod,Signature
 -keepclasseswithmembers class * {
-    public <init>(android.content.Context, android.util.AttributeSet, int);
+    public (android.content.Context, android.util.AttributeSet, int);
 }
+-keepattributes *Annotation*,EnclosingMethod,Signature
+-keep public class android.webkit.JavascriptInterface {}
 
-# Google Play Services library
+# MoPub SDK
+-keepclassmembers class com.mopub.** { public *; }
+-keep public class com.mopub.**
+
+# MoPub CustomEvent classes
+-keep class * extends com.mopub.nativeads.CustomEventNative {}
+
+# Keep methods that are accessed via reflection
+-keepclassmembers class ** { @com.mopub.common.util.ReflectionTarget *; }
+
+# Support for Android Advertiser ID.
+-keep class com.google.android.gms.common.GooglePlayServicesUtil { *; }
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient { *; }
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info { *; }
+
+# Support for Google Play Services
+# http://developer.android.com/google/play-services/setup.html
 -keep class * extends java.util.ListResourceBundle {
     protected Object[][] getContents();
 }
+
 -keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
     public static final *** NULL;
 }
+
 -keepnames @com.google.android.gms.common.annotation.KeepName class *
 -keepclassmembernames class * {
     @com.google.android.gms.common.annotation.KeepName *;
 }
--keepnames class * implements android.os.Parcelable {
-    public static final ** CREATOR;
-}
 
-# Google Mobile Ads SDK
--keep class com.google.android.gms.** {
-    *;
-}
--dontwarn com.google.android.gms.**
+# Flurry
+-keep class com.flurry.** { *; }
+-dontwarn com.flurry.**
+
+# AppLovin
+-libraryjars libs/applovin-6.4.2.jar
+-keep class com.applovin.** { *; }
+-dontwarn com.applovin.**

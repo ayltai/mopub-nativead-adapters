@@ -1,18 +1,154 @@
 apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'jacoco'
+apply plugin: 'org.standardout.versioneye'
+
+jacoco {
+    toolVersion '0.7.8'
+}
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 23
+        minSdkVersion 11
+        targetSdkVersion 25
     }
+
+    testOptions {
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses true
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+checkstyle {
+    configFile     rootProject.file('checkstyle.xml')
+    showViolations true
+}
+
+configurations {
+    codacy
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile('com.mopub:mopub-sdk:+@aar') { transitive = true }
-    compile 'com.flurry.android:ads:+'
-    compile 'com.google.android.gms:play-services-ads:+'
+    compile('com.mopub:mopub-sdk-native-static:4.11.0@aar') { transitive = true }
+    compile 'com.facebook.android:audience-network-sdk:4.19.0'
+    compile 'com.flurry.android:analytics:6.8.0'
+    compile 'com.flurry.android:ads:6.8.0'
+    compile 'com.google.android.gms:play-services-ads:10.0.1'
+
+    codacy 'com.github.codacy:codacy-coverage-reporter:1.0.13'
+}
+
+task customFindBugs(type: FindBugs) {
+    ignoreFailures = false
+    effort         = "max"
+    reportLevel    = "medium"
+    classes        = files("$project.buildDir/intermediates/classes")
+
+    // Use this only if you want exclude some errors
+    excludeFilter = file("$rootProject.rootDir/findbugs-android-exclude.xml")
+
+    source    = fileTree('src/main/java/')
+    classpath = files()
+
+    reports {
+        xml.enabled      = false
+        xml.withMessages = true
+        html.enabled     = true
+        xml.destination  "$project.buildDir/outputs/findbugs/findbugs-output.xml"
+        html.destination "$project.buildDir/outputs/findbugs/findbugs-output.html"
+    }
+}
+
+assemble.dependsOn customFindBugs
+
+def coverageSourceDirs = [
+    'src/main/java',
+    'src/debug/java'
+]
+
+task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
+    group       = 'Reporting'
+    description = 'Generate Jacoco coverage reports'
+
+    reports {
+        xml.enabled  = true
+        html.enabled = true
+    }
+
+    classDirectories = fileTree(
+        dir: 'build/intermediates/classes/test/debug',
+        excludes: [
+            '**/R.class',
+            '**/R$*.class',
+            '**/*$ViewInjector*.*',
+            '**/*$ViewBinder*.*',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/*$Lambda$*.*'
+        ]
+    )
+
+    sourceDirectories = files(coverageSourceDirs)
+    executionData     = files('build/jacoco/testDebugUnitTest.exec')
+
+    doFirst {
+        files('build/intermediates/classes/test/debug').getFiles().each { file ->
+            if (file.name.contains('$$')) {
+                file.renameTo(file.path.replace('$$', '$'))
+            }
+        }
+    }
+}
+
+task uploadCoverageToCodacy(type: JavaExec, dependsOn : jacocoTestReport) {
+    main      = "com.codacy.CodacyCoverageReporter"
+    classpath = configurations.codacy
+
+    args = [
+        "-l",
+        "Java",
+        "-r",
+        "${buildDir}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"
+    ]
+}
+
+task (codacyDepsize) << {
+    def size = 0;
+
+    configurations.codacy.collect {
+        it.length() / (1024 * 1024)
+    }
+    .each {
+        size += it
+    }
+
+    println "Total dependencies size: ${Math.round(size * 100) / 100} MB"
+
+    configurations.codacy.sort {
+        -it.length()
+    }
+    .each {
+        println "${it.name}: ${Math.round(it.length() / (1024) * 100) / 100} KB"
+    }
+}
+
+task (codacyLocs) << {
+    configurations.codacy.each {
+        String jarName = it
+        println jarName
+    }
 }
