@@ -121,6 +121,7 @@ public class AppLovinNativeAd extends BaseStaticNativeAd implements AppLovinNati
      * Returns an {@link AppLovinTargetingData} instance for ad targeting customization.
      * @return An {@link AppLovinTargetingData} instance for ad targeting customization.
      */
+    @NonNull
     public AppLovinTargetingData getTargetingData() {
         return this.appLovinSdk.getTargetingData();
     }
@@ -129,6 +130,7 @@ public class AppLovinNativeAd extends BaseStaticNativeAd implements AppLovinNati
      * Returns the settings used to initialize AppLovin SDK.
      * @return The settings used to initialize AppLovin SDK.
      */
+    @NonNull
     protected AppLovinSdkSettings getSettings() {
         final AppLovinSdkSettings settings = new AppLovinSdkSettings();
 
@@ -138,6 +140,7 @@ public class AppLovinNativeAd extends BaseStaticNativeAd implements AppLovinNati
         return settings;
     }
 
+    @NonNull
     private List<String> getImageUrls() {
         final List<String> imageUrls = new ArrayList<>(2);
 

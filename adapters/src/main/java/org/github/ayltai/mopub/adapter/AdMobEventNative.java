@@ -7,13 +7,13 @@ import android.support.annotation.NonNull;
 
 import com.mopub.nativeads.NativeErrorCode;
 
-public class AppLovinEventNative extends BaseEventNative<AppLovinNativeAd> {
+public class AdMobEventNative extends BaseEventNative<AdMobNativeAd> {
     @Override
     protected void loadNativeAd(@NonNull final Context context, @NonNull final CustomEventNativeListener customEventNativeListener, @NonNull final Map<String, Object> localExtras, @NonNull final Map<String, String> serverExtras) {
-        final String apiKey = serverExtras.get(BaseEventNative.KEY_API_KEY);
+        final String adUnitId = serverExtras.get(BaseEventNative.KEY_AD_UNIT_ID);
 
-        if (this.validateApiKey(apiKey)) {
-            final AppLovinNativeAd nativeAd = new AppLovinNativeAd(context, customEventNativeListener, apiKey);
+        if (this.validateAdUnitId(adUnitId)) {
+            final AdMobNativeAd nativeAd = new AdMobNativeAd(context, customEventNativeListener, adUnitId);
 
             this.onLoadNativeAd(nativeAd);
 

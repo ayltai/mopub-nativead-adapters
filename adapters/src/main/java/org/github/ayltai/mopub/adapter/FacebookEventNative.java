@@ -22,13 +22,4 @@ public class FacebookEventNative extends BaseEventNative<FacebookNativeAd> {
             customEventNativeListener.onNativeAdFailed(NativeErrorCode.NATIVE_ADAPTER_CONFIGURATION_ERROR);
         }
     }
-
-    /**
-     * You may customize ad requests here.
-     * @param nativeAd A {@link FacebookNativeAd} instance to let you customize ad requests.
-     */
-    @Override
-    protected void onLoadNativeAd(@NonNull final FacebookNativeAd nativeAd) {
-        super.onLoadNativeAd(nativeAd);
-    }
 }

@@ -187,6 +187,7 @@ public class FlurryNativeAd extends BaseStaticNativeAd implements FlurryAdNative
      * Returns a {@link FlurryAdTargeting} instance for ad targeting customization.
      * @return A {@link FlurryAdTargeting} instance for ad targeting customization.
      */
+    @NonNull
     public FlurryAdTargeting getTargetingData() {
         return this.targetingData;
     }
@@ -201,6 +202,7 @@ public class FlurryNativeAd extends BaseStaticNativeAd implements FlurryAdNative
         return imageUrls;
     }
 
+    @Nullable
     private static Double getStarRatingValue(@Nullable final String appRatingString) {
         // App rating String should be of the form X/Y. E.g. 80/100
         if (appRatingString != null) {

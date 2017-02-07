@@ -29,13 +29,4 @@ public class FlurryEventNative extends BaseEventNative<FlurryNativeAd> {
             customEventNativeListener.onNativeAdFailed(NativeErrorCode.NATIVE_ADAPTER_CONFIGURATION_ERROR);
         }
     }
-
-    /**
-     * You may customize ad requests here.
-     * @param nativeAd A {@link FlurryNativeAd} instance to let you customize ad requests.
-     */
-    @Override
-    protected void onLoadNativeAd(@NonNull final FlurryNativeAd nativeAd) {
-        super.onLoadNativeAd(nativeAd);
-    }
 }

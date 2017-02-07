@@ -1,1 +1,5 @@
-<manifest package="org.github.ayltai.mopub.adapter" />
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.github.ayltai.mopub.adapter">
+    <uses-permission android:name="android.permission.INTERNET" />
+</manifest>
