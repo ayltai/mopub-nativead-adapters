@@ -99,22 +99,7 @@ public class FlurryNativeAd extends BaseStaticNativeAd implements FlurryAdNative
 
             this.addExtra(FlurryNativeAd.EXTRA_SEC_BRANDING_LOGO, this.nativeAd.getAsset(FlurryNativeAd.ASSET_SEC_HQ_BRANDING_LOGO).getValue());
 
-            if (this.isAppInstallAd()) {
-                // App rating image URL may be null
-                final FlurryAdNativeAsset ratingHqImageAsset = this.nativeAd.getAsset(FlurryNativeAd.ASSET_SEC_HQ_RATING_IMG);
-                if (ratingHqImageAsset != null && !TextUtils.isEmpty(ratingHqImageAsset.getValue())) {
-                    this.addExtra(FlurryNativeAd.EXTRA_STAR_RATING_IMG, ratingHqImageAsset.getValue());
-                } else {
-                    final FlurryAdNativeAsset ratingImageAsset = this.nativeAd.getAsset(FlurryNativeAd.ASSET_SEC_RATING_IMG);
-                    if (ratingImageAsset != null && !TextUtils.isEmpty(ratingImageAsset.getValue())) this.addExtra(FlurryNativeAd.EXTRA_STAR_RATING_IMG, ratingImageAsset.getValue());
-                }
-
-                final FlurryAdNativeAsset appCategoryAsset = this.nativeAd.getAsset(FlurryNativeAd.ASSET_APP_CATEGORY);
-                if (appCategoryAsset != null) this.addExtra(FlurryNativeAd.EXTRA_APP_CATEGORY, appCategoryAsset.getValue());
-
-                final FlurryAdNativeAsset appRatingAsset = this.nativeAd.getAsset(FlurryNativeAd.ASSET_APP_RATING);
-                if(appRatingAsset != null) this.setStarRating(FlurryNativeAd.getStarRatingValue(appRatingAsset.getValue()));
-            }
+            if (this.isAppInstallAd()) this.readAppInstallAdAssets();
 
             final FlurryAdNativeAsset ctaAsset = this.nativeAd.getAsset(FlurryNativeAd.CALL_TO_ACTION);
             if (ctaAsset != null) this.setCallToAction(ctaAsset.getValue());
@@ -222,5 +207,22 @@ public class FlurryNativeAd extends BaseStaticNativeAd implements FlurryAdNative
         }
 
         return null;
+    }
+
+    private void readAppInstallAdAssets() {
+        // App rating image URL may be null
+        final FlurryAdNativeAsset ratingHqImageAsset = this.nativeAd.getAsset(FlurryNativeAd.ASSET_SEC_HQ_RATING_IMG);
+        if (ratingHqImageAsset != null && !TextUtils.isEmpty(ratingHqImageAsset.getValue())) {
+            this.addExtra(FlurryNativeAd.EXTRA_STAR_RATING_IMG, ratingHqImageAsset.getValue());
+        } else {
+            final FlurryAdNativeAsset ratingImageAsset = this.nativeAd.getAsset(FlurryNativeAd.ASSET_SEC_RATING_IMG);
+            if (ratingImageAsset != null && !TextUtils.isEmpty(ratingImageAsset.getValue())) this.addExtra(FlurryNativeAd.EXTRA_STAR_RATING_IMG, ratingImageAsset.getValue());
+        }
+
+        final FlurryAdNativeAsset appCategoryAsset = this.nativeAd.getAsset(FlurryNativeAd.ASSET_APP_CATEGORY);
+        if (appCategoryAsset != null) this.addExtra(FlurryNativeAd.EXTRA_APP_CATEGORY, appCategoryAsset.getValue());
+
+        final FlurryAdNativeAsset appRatingAsset = this.nativeAd.getAsset(FlurryNativeAd.ASSET_APP_RATING);
+        if (appRatingAsset != null) this.setStarRating(FlurryNativeAd.getStarRatingValue(appRatingAsset.getValue()));
     }
 }

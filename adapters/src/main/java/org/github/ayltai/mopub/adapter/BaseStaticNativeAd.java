@@ -48,10 +48,10 @@ public abstract class BaseStaticNativeAd extends StaticNativeAd {
      */
     public abstract void fetchAd();
 
-     /**
-     * Helper method to pre-cache ad images.
-     * @param imageUrls A list of images to cache.
-     */
+    /**
+    * Helper method to pre-cache ad images.
+    * @param imageUrls A list of images to cache.
+    */
     protected void preCacheImages(@NonNull final List<String> imageUrls) {
         NativeImageHelper.preCacheImages(this.context, imageUrls, this.imageListener);
     }

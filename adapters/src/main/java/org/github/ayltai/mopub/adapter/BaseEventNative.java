@@ -23,7 +23,7 @@ public abstract class BaseEventNative<T extends BaseStaticNativeAd> extends Cust
 
     @VisibleForTesting
     @Override
-    public abstract void loadNativeAd(@NonNull final Context context, @NonNull final CustomEventNativeListener customEventNativeListener, @NonNull final Map<String, Object> localExtras, @NonNull final Map<String, String> serverExtras);
+    public abstract void loadNativeAd(@NonNull Context context, @NonNull CustomEventNativeListener customEventNativeListener, @NonNull Map<String, Object> localExtras, @NonNull Map<String, String> serverExtras);
 
     protected boolean validateServerExtras(@NonNull final Map<String, String> serverExtras) {
         return this.validateApiKey(serverExtras.get(BaseEventNative.KEY_API_KEY)) && this.validateAdUnitId(serverExtras.get(BaseEventNative.KEY_AD_UNIT_ID));

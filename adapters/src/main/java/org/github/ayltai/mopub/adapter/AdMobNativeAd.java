@@ -70,7 +70,7 @@ public abstract class AdMobNativeAd extends BaseStaticNativeAd implements Native
      * @param adView The native ad view to render the ad.
      * @param nativeAd The native ad instance used to render the ad view.
      */
-    protected abstract void prepare(@NonNull final NativeAppInstallAdView adView, @NonNull final NativeAppInstallAd nativeAd);
+    protected abstract void prepare(@NonNull NativeAppInstallAdView adView, @NonNull NativeAppInstallAd nativeAd);
 
     /**
      * To render ad view properly, implementation is expected to call {@link NativeContentAdView#setHeadlineView(View)}, {@link NativeContentAdView#setBodyView(View)}, {@link NativeContentAdView#setCallToActionView(View)}, and/or {@link NativeContentAdView#setImageView(View)} methods,
@@ -78,7 +78,7 @@ public abstract class AdMobNativeAd extends BaseStaticNativeAd implements Native
      * @param adView The native ad view to render the ad.
      * @param nativeAd The native ad instance used to render the ad view.
      */
-    protected abstract void prepare(@NonNull final NativeContentAdView adView, @NonNull final NativeContentAd nativeAd);
+    protected abstract void prepare(@NonNull NativeContentAdView adView, @NonNull NativeContentAd nativeAd);
 
     @Override
     public void clear(@NonNull final View view) {
@@ -183,10 +183,11 @@ public abstract class AdMobNativeAd extends BaseStaticNativeAd implements Native
         return this.nativeAdOptionsBuilder;
     }
 
-    private void render(final NativeAppInstallAd nativeAd) {
-        if (!TextUtils.isEmpty(nativeAd.getHeadline())) this.setTitle(nativeAd.getHeadline().toString());
-        if (!TextUtils.isEmpty(nativeAd.getBody())) this.setText(nativeAd.getBody().toString());
-        if (!TextUtils.isEmpty(nativeAd.getCallToAction())) this.setCallToAction(nativeAd.getCallToAction().toString());
+    private void render(@NonNull final NativeAppInstallAd nativeAd) {
+        this.setHeadline(nativeAd);
+        this.setBody(nativeAd);
+        this.setCallToAction(nativeAd);
+        this.setStarRating(nativeAd);
 
         final List<String> imageUrls = new ArrayList<>();
 
@@ -203,14 +204,12 @@ public abstract class AdMobNativeAd extends BaseStaticNativeAd implements Native
         }
 
         this.preCacheImages(imageUrls);
-
-        if (nativeAd.getStarRating() != null && nativeAd.getStarRating() > 0) this.setStarRating(nativeAd.getStarRating());
     }
 
-    private void render(final NativeContentAd nativeAd) {
-        if (!TextUtils.isEmpty(nativeAd.getHeadline())) this.setTitle(nativeAd.getHeadline().toString());
-        if (!TextUtils.isEmpty(nativeAd.getBody())) this.setText(nativeAd.getBody().toString());
-        if (!TextUtils.isEmpty(nativeAd.getCallToAction())) this.setCallToAction(nativeAd.getCallToAction().toString());
+    private void render(@NonNull final NativeContentAd nativeAd) {
+        this.setHeadline(nativeAd);
+        this.setBody(nativeAd);
+        this.setCallToAction(nativeAd);
 
         final List<String> imageUrls = new ArrayList<>();
 
@@ -227,5 +226,33 @@ public abstract class AdMobNativeAd extends BaseStaticNativeAd implements Native
         }
 
         this.preCacheImages(imageUrls);
+    }
+
+    private void setHeadline(@NonNull final NativeAppInstallAd nativeAd) {
+        if (!TextUtils.isEmpty(nativeAd.getHeadline())) this.setTitle(nativeAd.getHeadline().toString());
+    }
+
+    private void setHeadline(@NonNull final NativeContentAd nativeAd) {
+        if (!TextUtils.isEmpty(nativeAd.getHeadline())) this.setTitle(nativeAd.getHeadline().toString());
+    }
+
+    private void setBody(@NonNull final NativeAppInstallAd nativeAd) {
+        if (!TextUtils.isEmpty(nativeAd.getBody())) this.setText(nativeAd.getBody().toString());
+    }
+
+    private void setBody(@NonNull final NativeContentAd nativeAd) {
+        if (!TextUtils.isEmpty(nativeAd.getBody())) this.setText(nativeAd.getBody().toString());
+    }
+
+    private void setCallToAction(@NonNull final NativeAppInstallAd nativeAd) {
+        if (!TextUtils.isEmpty(nativeAd.getCallToAction())) this.setCallToAction(nativeAd.getCallToAction().toString());
+    }
+
+    private void setCallToAction(@NonNull final NativeContentAd nativeAd) {
+        if (!TextUtils.isEmpty(nativeAd.getCallToAction())) this.setCallToAction(nativeAd.getCallToAction().toString());
+    }
+
+    private void setStarRating(@NonNull final NativeAppInstallAd nativeAd) {
+        if (nativeAd.getStarRating() != null && nativeAd.getStarRating() > 0) this.setStarRating(nativeAd.getStarRating());
     }
 }
