@@ -14,7 +14,7 @@ import com.mopub.nativeads.NativeErrorCode;
 
 public class FlurryEventNative extends BaseEventNative<FlurryNativeAd> {
     @Override
-    protected void loadNativeAd(@NonNull final Context context, @NonNull final CustomEventNative.CustomEventNativeListener customEventNativeListener, @NonNull final Map<String, Object> localExtras, @NonNull final Map<String, String> serverExtras) {
+    public void loadNativeAd(@NonNull final Context context, @NonNull final CustomEventNative.CustomEventNativeListener customEventNativeListener, @NonNull final Map<String, Object> localExtras, @NonNull final Map<String, String> serverExtras) {
         final String apiKey = serverExtras.get(BaseEventNative.KEY_API_KEY);
 
         if (this.validateApiKey(apiKey)) {

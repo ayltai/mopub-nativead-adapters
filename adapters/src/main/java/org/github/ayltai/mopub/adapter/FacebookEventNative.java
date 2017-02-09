@@ -10,7 +10,7 @@ import com.mopub.nativeads.NativeErrorCode;
 
 public class FacebookEventNative extends BaseEventNative<FacebookNativeAd> {
     @Override
-    protected void loadNativeAd(@NonNull final Context context, @NonNull final CustomEventNativeListener customEventNativeListener, @NonNull final Map<String, Object> localExtras, @NonNull final Map<String, String> serverExtras) {
+    public void loadNativeAd(@NonNull final Context context, @NonNull final CustomEventNativeListener customEventNativeListener, @NonNull final Map<String, Object> localExtras, @NonNull final Map<String, String> serverExtras) {
         final String adUnitId = serverExtras.get(BaseEventNative.KEY_AD_UNIT_ID);
 
         if (this.validateAdUnitId(adUnitId)) {
