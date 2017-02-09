@@ -2,6 +2,7 @@ package org.github.ayltai.mopub.adapter;
 
 import java.util.Map;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -37,4 +38,6 @@ public abstract class BaseEventNative<T extends BaseStaticNativeAd> extends Cust
      */
     protected void onLoadNativeAd(@NonNull final T nativeAd) {
     }
+
+    protected abstract T createNativeAd(@NonNull Context context, @NonNull CustomEventNative.CustomEventNativeListener customEventNativeListener, @Nullable String apiKey, @Nullable String adUnitId);
 }
