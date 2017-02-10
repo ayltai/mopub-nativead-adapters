@@ -12,6 +12,7 @@ import android.view.View;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.formats.NativeAd;
 import com.google.android.gms.ads.formats.NativeAdOptions;
 import com.google.android.gms.ads.formats.NativeAdView;
 import com.google.android.gms.ads.formats.NativeAppInstallAd;
@@ -117,6 +118,10 @@ public abstract class AdMobNativeAd extends BaseStaticNativeAd implements Native
             .loadAd(this.getAdRequestBuilder().build());
     }
 
+    public NativeAd getNativeAd() {
+        return this.nativeAppInstallAd == null ? this.nativeContentAd : this.nativeAppInstallAd;
+    }
+
     @Override
     public void onAppInstallAdLoaded(final NativeAppInstallAd nativeAd) {
         this.nativeAppInstallAd = nativeAd;
@@ -124,8 +129,6 @@ public abstract class AdMobNativeAd extends BaseStaticNativeAd implements Native
         this.render(this.nativeAppInstallAd);
 
         this.setImpressionMinTimeViewed(BaseStaticNativeAd.IMPRESSION_MIN_TIME);
-
-        this.getCustomEventNativeListener().onNativeAdLoaded(this);
     }
 
     @Override
@@ -135,8 +138,6 @@ public abstract class AdMobNativeAd extends BaseStaticNativeAd implements Native
         this.render(this.nativeContentAd);
 
         this.setImpressionMinTimeViewed(BaseStaticNativeAd.IMPRESSION_MIN_TIME);
-
-        this.getCustomEventNativeListener().onNativeAdLoaded(this);
     }
 
     protected void onAdFailedToLoad(final int errorCode) {

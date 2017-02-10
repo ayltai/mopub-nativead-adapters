@@ -92,8 +92,6 @@ public class FacebookNativeAd extends BaseStaticNativeAd implements AdListener, 
         this.preCacheImages(this.getImageUrls());
 
         this.setImpressionMinTimeViewed(BaseStaticNativeAd.IMPRESSION_MIN_TIME);
-
-        this.getCustomEventNativeListener().onNativeAdLoaded(this);
     }
 
     @Override

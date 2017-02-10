@@ -1,11 +1,18 @@
 package org.github.ayltai.mopub.adapter.app;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.mopub.nativeads.MoPubNative;
@@ -16,7 +23,12 @@ import com.mopub.nativeads.RequestParameters;
 import com.mopub.nativeads.ViewBinder;
 
 public final class MainActivity extends Activity implements MoPubNative.MoPubNativeNetworkListener, NativeAd.MoPubNativeEventListener {
-    private MoPubNative moPubNative;
+    private static final int MAX_ITEMS = 10;
+
+    private final List<NativeAd> nativeAds = new ArrayList<>();
+
+    private MoPubNative     moPubNative;
+    private NativeAdAdapter adapter;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -26,7 +38,15 @@ public final class MainActivity extends Activity implements MoPubNative.MoPubNat
 
         this.initMoPub("TODO");
 
-        this.setContentView(R.layout.activity_main);
+        this.adapter = new NativeAdAdapter(this.nativeAds);
+
+        final RecyclerView recyclerView = (RecyclerView)LayoutInflater.from(this).inflate(R.layout.activity_main, (ViewGroup)this.findViewById(android.R.id.content), false);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(this.adapter);
+
+        this.setContentView(recyclerView);
+
+        this.requestAd();
     }
 
     @Override
@@ -35,29 +55,38 @@ public final class MainActivity extends Activity implements MoPubNative.MoPubNat
 
         Fresco.shutDown();
 
+        for (final NativeAd nativeAd : this.nativeAds) nativeAd.destroy();
+
         if (this.moPubNative != null) this.moPubNative.destroy();
     }
 
     @Override
     public void onNativeLoad(final NativeAd nativeAd) {
+        Log.i(this.getClass().getSimpleName(), "Native ad loaded");
+
         nativeAd.setMoPubNativeEventListener(this);
 
-        // TODO
+        synchronized (this.nativeAds) {
+            this.nativeAds.add(nativeAd);
+            this.adapter.notifyItemInserted(this.nativeAds.size() - 1);
+        }
+
+        if (this.nativeAds.size() < MainActivity.MAX_ITEMS) this.requestAd();
     }
 
     @Override
     public void onNativeFail(final NativeErrorCode errorCode) {
-        // TODO
+        Log.w(this.getClass().getSimpleName(), errorCode.toString());
     }
 
     @Override
     public void onImpression(final View view) {
-        // TODO
+        // Ad impression has been recorded on MoPub and the corresponding ad network
     }
 
     @Override
     public void onClick(final View view) {
-        // TODO
+        // Ad click has been recorded on MoPub and the corresponding ad network
     }
 
     private void initMoPub(@NonNull final String adUnitId) {

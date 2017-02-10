@@ -82,8 +82,6 @@ public class AppLovinNativeAd extends BaseStaticNativeAd implements AppLovinNati
 
             this.setImpressionMinTimeViewed(BaseStaticNativeAd.IMPRESSION_MIN_TIME);
             this.notifyAdImpressed();
-
-            this.getCustomEventNativeListener().onNativeAdLoaded(this);
         }
     }
 

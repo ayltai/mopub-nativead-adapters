@@ -108,8 +108,6 @@ public class FlurryNativeAd extends BaseStaticNativeAd implements FlurryAdNative
 
             final List<String> imageUrls = this.getImageUrls();
             if (!imageUrls.isEmpty()) this.preCacheImages(this.getImageUrls());
-
-            this.getCustomEventNativeListener().onNativeAdLoaded(this);
         }
     }
 
