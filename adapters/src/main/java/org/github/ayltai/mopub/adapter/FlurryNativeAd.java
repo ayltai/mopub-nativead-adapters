@@ -167,7 +167,7 @@ public class FlurryNativeAd extends BaseStaticNativeAd implements FlurryAdNative
      * @return {@code true} if the fetched native ad is an app-install ad; otherwise, {@code false}.
      */
     public boolean isAppInstallAd() {
-        return this.nativeAd.getAsset(FlurryNativeAd.ASSET_SEC_RATING_IMG) != null || this.nativeAd.getAsset(FlurryNativeAd.ASSET_SEC_HQ_RATING_IMG) != null || this.nativeAd.getAsset(ASSET_APP_CATEGORY) != null;
+        return this.nativeAd.getAsset(FlurryNativeAd.ASSET_SEC_RATING_IMG) != null || this.nativeAd.getAsset(FlurryNativeAd.ASSET_SEC_HQ_RATING_IMG) != null || this.nativeAd.getAsset(FlurryNativeAd.ASSET_APP_CATEGORY) != null;
     }
 
     /**

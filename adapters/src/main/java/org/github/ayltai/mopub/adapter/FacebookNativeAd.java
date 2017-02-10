@@ -21,7 +21,7 @@ import com.mopub.nativeads.NativeErrorCode;
 public class FacebookNativeAd extends BaseStaticNativeAd implements AdListener, ImpressionListener {
     private static final String SOCIAL_CONTEXT_FOR_AD = "socialContextForAd";
 
-    private NativeAd nativeAd;
+    private final NativeAd nativeAd;
 
     public FacebookNativeAd(@NonNull final Context context, @NonNull final CustomEventNative.CustomEventNativeListener customEventNativeListener, @NonNull final String adUnitId) {
         super(context.getApplicationContext(), customEventNativeListener);

@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 
 import org.mockito.Mockito;
 
+import com.mopub.nativeads.CustomEventNative;
+
 public final class AdMobEventNativeTest extends BaseEventNativeTest<AdMobEventNativeTest.MockAdMobEventNative, AdMobNativeAd> {
     @Override
     public AdMobEventNativeTest.MockAdMobEventNative createCustomEventNative() {
@@ -19,7 +21,7 @@ public final class AdMobEventNativeTest extends BaseEventNativeTest<AdMobEventNa
 
     public class MockAdMobEventNative extends AdMobEventNative<AdMobNativeAd> {
         @Override
-        protected AdMobNativeAd createNativeAd(@NonNull final Context context, @NonNull final CustomEventNativeListener customEventNativeListener, @Nullable final String apiKey, @Nullable final String adUnitId) {
+        protected AdMobNativeAd createNativeAd(@NonNull final Context context, @NonNull final CustomEventNative.CustomEventNativeListener customEventNativeListener, @Nullable final String apiKey, @Nullable final String adUnitId) {
             return AdMobEventNativeTest.this.getNativeAd();
         }
     }

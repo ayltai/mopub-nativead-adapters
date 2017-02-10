@@ -6,9 +6,11 @@ import android.support.annotation.Nullable;
 
 import org.github.ayltai.mopub.adapter.AdMobEventNative;
 
+import com.mopub.nativeads.CustomEventNative;
+
 public class SampleAdMobEventNative extends AdMobEventNative<SampleAdMobNativeAd> {
     @Override
-    protected SampleAdMobNativeAd createNativeAd(@NonNull final Context context, @NonNull final CustomEventNativeListener customEventNativeListener, @Nullable final String apiKey, @Nullable final String adUnitId) {
+    protected SampleAdMobNativeAd createNativeAd(@NonNull final Context context, @NonNull final CustomEventNative.CustomEventNativeListener customEventNativeListener, @Nullable final String apiKey, @Nullable final String adUnitId) {
         return new SampleAdMobNativeAd(context, customEventNativeListener, adUnitId);
     }
 }

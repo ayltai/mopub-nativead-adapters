@@ -33,8 +33,6 @@ public final class MainActivity extends Activity implements MoPubNative.MoPubNat
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Fresco.initialize(this);
-
         this.initMoPub("TODO");
 
         this.adapter = new NativeAdAdapter(this.nativeAds);

@@ -6,11 +6,12 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.mopub.nativeads.CustomEventNative;
 import com.mopub.nativeads.NativeErrorCode;
 
 public class FacebookEventNative extends BaseEventNative<FacebookNativeAd> {
     @Override
-    public void loadNativeAd(@NonNull final Context context, @NonNull final CustomEventNativeListener customEventNativeListener, @NonNull final Map<String, Object> localExtras, @NonNull final Map<String, String> serverExtras) {
+    public void loadNativeAd(@NonNull final Context context, @NonNull final CustomEventNative.CustomEventNativeListener customEventNativeListener, @NonNull final Map<String, Object> localExtras, @NonNull final Map<String, String> serverExtras) {
         final String adUnitId = serverExtras.get(BaseEventNative.KEY_AD_UNIT_ID);
 
         if (this.validateAdUnitId(adUnitId)) {
@@ -25,7 +26,7 @@ public class FacebookEventNative extends BaseEventNative<FacebookNativeAd> {
     }
 
     @Override
-    protected FacebookNativeAd createNativeAd(@NonNull final Context context, @NonNull final CustomEventNativeListener customEventNativeListener, @Nullable final String apiKey, @Nullable final String adUnitId) {
+    protected FacebookNativeAd createNativeAd(@NonNull final Context context, @NonNull final CustomEventNative.CustomEventNativeListener customEventNativeListener, @Nullable final String apiKey, @Nullable final String adUnitId) {
         return new FacebookNativeAd(context, customEventNativeListener, adUnitId);
     }
 }
