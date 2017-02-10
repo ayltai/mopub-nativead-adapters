@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.mopub.nativeads.MoPubNative;
 import com.mopub.nativeads.MoPubStaticNativeAdRenderer;
 import com.mopub.nativeads.NativeAd;
@@ -52,8 +51,6 @@ public final class MainActivity extends Activity implements MoPubNative.MoPubNat
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        Fresco.shutDown();
 
         for (final NativeAd nativeAd : this.nativeAds) nativeAd.destroy();
 

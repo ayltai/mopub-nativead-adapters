@@ -10,101 +10,102 @@
         android:id="@+id/ad_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:padding="@dimen/space"
         android:maxLines="2"
         android:ellipsize="end"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000"
+        android:textColor="@color/title_text"
         android:textStyle="bold" />
-    <com.facebook.drawee.view.SimpleDraweeView
+    <ImageView
         android:id="@+id/ad_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:actualImageScaleType="fitCenter" />
+        android:scaleType="fitCenter" />
     <TextView
         android:id="@+id/ad_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:padding="@dimen/space"
         android:maxLines="2"
         android:ellipsize="end"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#000" />
+        android:textColor="@color/body_text" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="8dp"
-        android:paddingStart="8dp"
-        android:paddingRight="8dp"
-        android:paddingEnd="8dp"
-        android:paddingBottom="8dp"
+        android:paddingLeft="@dimen/space"
+        android:paddingStart="@dimen/space"
+        android:paddingRight="@dimen/space"
+        android:paddingEnd="@dimen/space"
+        android:paddingBottom="@dimen/space"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#999"
+        android:textColor="@color/meta_text"
         android:text="Sponsored" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/up_vote"
-            android:layout_width="64dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="@dimen/meta_button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginLeft="@dimen/space"
+            android:layout_marginStart="@dimen/space"
             android:background="@drawable/bg_button"
             android:scaleType="center"
             android:src="@drawable/ic_upvote_black_24dp"
-            android:tint="#999" />
+            android:tint="@color/meta_button" />
         <ImageView
             android:id="@+id/down_vote"
-            android:layout_width="64dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="@dimen/meta_button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginLeft="@dimen/space"
+            android:layout_marginStart="@dimen/space"
             android:layout_toRightOf="@+id/up_vote"
             android:layout_toEndOf="@+id/up_vote"
             android:background="@drawable/bg_button"
             android:scaleType="center"
             android:src="@drawable/ic_downvote_black_48dp"
-            android:tint="#999" />
+            android:tint="@color/meta_button" />
         <ImageView
             android:id="@+id/comment"
-            android:layout_width="64dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="@dimen/meta_button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginLeft="@dimen/space"
+            android:layout_marginStart="@dimen/space"
             android:layout_toRightOf="@+id/down_vote"
             android:layout_toEndOf="@+id/down_vote"
             android:background="@drawable/bg_button"
             android:scaleType="center"
             android:src="@drawable/ic_comment_black_24dp"
-            android:tint="#999" />
+            android:tint="@color/meta_button" />
         <ImageView
             android:layout_width="32dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginLeft="@dimen/space"
+            android:layout_marginStart="@dimen/space"
             android:layout_toRightOf="@+id/comment"
             android:layout_toEndOf="@+id/comment"
             android:scaleType="center"
             android:src="@drawable/ic_more_black_24dp"
-            android:tint="#999" />
+            android:tint="@color/meta_button" />
         <Button
             android:id="@+id/ad_call_to_action"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/button_height"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="8dp"
-            android:layout_marginEnd="8dp"
-            android:padding="8dp"
+            android:layout_marginRight="@dimen/space"
+            android:layout_marginEnd="@dimen/space"
+            android:padding="@dimen/space"
             android:background="@drawable/bg_call_to_action"
             android:maxLines="1"
             android:maxLength="25"
-            android:textColor="#fff" />
+            android:textColor="@color/button_text"
+            android:textStyle="bold" />
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginTop="8dp"
-        android:background="#999" />
+        android:layout_height="@dimen/button_border"
+        android:layout_marginTop="@dimen/space"
+        android:background="@color/border" />
 </LinearLayout>
