@@ -19,11 +19,10 @@
 -keepnames class * implements android.os.Parcelable {
     public static final ** CREATOR;
 }
--keepclasseswithmembers class * {
-    public (android.content.Context, android.util.AttributeSet, int);
-}
 -keepattributes *Annotation*,EnclosingMethod,Signature
 -keep public class android.webkit.JavascriptInterface {}
+-dontnote android.net.http.**
+-dontnote org.apache.http.**
 
 # MoPub SDK
 -keepclassmembers class com.mopub.** { public *; }
@@ -60,33 +59,6 @@
 -dontwarn com.flurry.**
 
 # AppLovin
--libraryjars libs/applovin-6.4.2.jar
 -keep class com.applovin.** { *; }
 -dontwarn com.applovin.**
-
-### Facebook Fresco
-# Keep our interfaces so they can be used by other ProGuard rules.
-# See http://sourceforge.net/p/proguard/bugs/466/
--keep,allowobfuscation @interface com.facebook.common.internal.DoNotStrip
-
-# Do not strip any method/class that is annotated with @DoNotStrip
--keep @com.facebook.common.internal.DoNotStrip class *
--keepclassmembers class * {
-    @com.facebook.common.internal.DoNotStrip *;
-}
-
--keep class com.facebook.** { *; }
--dontnote com.facebook.**
-
-# Keep native methods
--keepclassmembers class * {
-    native <methods>;
-}
-
--dontwarn okio.**
--dontnote okio.**
--keep class com.squareup.okhttp.** { *; }
--keep interface com.squareup.okhttp.** { *; }
--dontwarn com.squareup.okhttp.**
--dontwarn javax.annotation.**
--dontwarn com.android.volley.toolbox.**
+-dontnote com.applovin.**

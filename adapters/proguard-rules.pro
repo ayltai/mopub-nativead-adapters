@@ -19,11 +19,10 @@
 -keepnames class * implements android.os.Parcelable {
     public static final ** CREATOR;
 }
--keepclasseswithmembers class * {
-    public (android.content.Context, android.util.AttributeSet, int);
-}
 -keepattributes *Annotation*,EnclosingMethod,Signature
 -keep public class android.webkit.JavascriptInterface {}
+-dontnote android.net.http.**
+-dontnote org.apache.http.**
 
 # MoPub SDK
 -keepclassmembers class com.mopub.** { public *; }
@@ -60,6 +59,6 @@
 -dontwarn com.flurry.**
 
 # AppLovin
--libraryjars libs/applovin-6.4.2.jar
 -keep class com.applovin.** { *; }
 -dontwarn com.applovin.**
+-dontnote com.applovin.**
