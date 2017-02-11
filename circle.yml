@@ -18,7 +18,7 @@ dependencies:
     - android list targets
 test:
   override:
-    - case $CIRCLE_NODE_INDEX in 0) (source scripts/ci-helpers.sh && generateTestReports) ;; 1) (source scripts/ci-helpers.sh && inspectCode) ;; esac;
+    - case $CIRCLE_NODE_INDEX in 0) (source scripts/ci-helpers.sh && generateTestReports) ;; 1) (source scripts/ci-helpers.sh && inspectCode) ;; esac:
         parallel: true
         timeout: 900
   post:
