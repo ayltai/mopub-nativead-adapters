@@ -46,14 +46,14 @@ dependencies {
     ...
     <!-- Required -->
     <uses-permission android:name="android.permission.INTERNET" />
-&
+
     <!-- Required by Facebook Audience Network and Flurry Ads -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-&
+
     <!-- Required by AppLovin -->
     <!-- Recommended for external memory pre-caching -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-&
+
     <!-- Optional -->
     <!-- Recommended for location based ad targeting -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -75,17 +75,17 @@ dependencies {
     <activity
         android:name="com.mopub.common.MoPubBrowser"
         android:configChanges="keyboardHidden|orientation|screenSize" />
-&
+
     <!-- Facebook Audience Network -->
     <activity
         android:name="com.facebook.ads.AudienceNetworkActivity"
         android:configChanges="keyboardHidden|orientation|screenSize" />
-&
+
     <!-- Flurry Ads -->
     <activity
         android:name="com.flurry.android.FlurryFullscreenTakeoverActivity"
         android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-&
+
     <!-- AppLovin -->
     <activity android:name="com.applovin.adview.AppLovinInterstitialActivity" />
     <activity android:name="com.applovin.adview.AppLovinConfirmationActivity" />
@@ -115,21 +115,26 @@ The most important part of the setup is [Network](https://app.mopub.com/networks
 
 #### Step 1: Create a Custom Native Network
 Add a "Custom Native" network by clicking this button:
+
 ![Add a Network](screenshots/mopub-add-network.png "Add a Network")
 
 Select "Custom Native Network":
+
 ![Select Network](screenshots/mopub-select-network.png "Select Network")
 
 You can change the network title and update its advanced settings, but this is not necessary. Click "Save Section" to save the network and then go back to Network Detail page.
 
 #### Step 2: Configure Custom Native Event classes
 On the Network Detail page, click the pen icon next to the network title to edit it.
+
 ![Edit Network](screenshots/mopub-edit-network.png "Edit Network")
 
 Under the corresponding apps, a list of supported ad units is shown. At the bottom, there is a button to let you enter the edit mode. **You need to click "Edit Section" button before doing any updates.** Otherwise, the changes will not be saved even though it seems they are.
+
 ![Edit Section](screenshots/mopub-edit-section.png "Edit Section")
 
 Then you can enter the following information into the text boxes:
+
 ![Custom Event Class](screenshots/mopub-custom-event-class.png "Custom Event Class")
 
 **Custom Event Class:** `org.github.ayltai.mopub.adapter.FacebookNativeEvent` (or any other `BaseNativeEvent` sub-classes supported by this library). If you have extended this classes, you must specify the exact package and class name accordingly.
@@ -180,7 +185,7 @@ public void onNativeLoad(NativeAd nativeAd) {
     nativeAd.renderAdView(view);
     nativeAd.prepare();
 }
-&
+
 @Override
 public void onNativeFail(NativeErrorCode errorCode) {
     // Handle failures here
@@ -216,7 +221,7 @@ You may try to resize your `ImageView` after calling `renderAdView` and `prepare
 ```java
 DisplayMetrics metrics = new DisplayMetrics();
 ((WindowManager)adContainerView.getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
-&
+
 ViewGroup.LayoutParams params = imageView.getLayoutParams();
 params.width  = metrics.widthPixels;
 params.height = (int)(metrics.widthPixels / 1.91f + 0.5f);
