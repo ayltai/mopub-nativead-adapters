@@ -8,10 +8,10 @@ Custom adapters for [MoPub](http://www.mopub.com) native ads.
 ![Screenshot](screenshots/screenshot.png "Screenshot")
 
 ## Supported Adapters
-* AdMob Native Ads Advanced
-* Facebook Audience Network
-* Flurry Native Ads
-* AppLovin Native Ads
+* [AdMob Native Ads Advanced](https://firebase.google.com/docs/admob/android/native-advanced)
+* [Facebook Audience Network](https://developers.facebook.com/docs/audience-network/android-native)
+* [Flurry Native Ads](https://developer.yahoo.com/flurry/docs/publisher/code/android)
+* [AppLovin Native Ads](https://www.applovin.com/developers)
 * [MoPub](http://www.mopub.com) Built-in Native Ads
 
 ## Gradle
@@ -240,6 +240,10 @@ Here we provide a [working example](https://github.com/ayltai/mopub-nativead-ada
 **In slow network condition, it is slow to fetch ads. Can I pre-fetch ads, or re-use previously displayed ads?**
 
 Yes! It is a bit tricky but not hard at all. I would like to leave it to the reader as an exercise.
+
+**How to customize ad requests and apply ad targeting?**
+
+You can do it by extending [BaseEventNative](https://github.com/ayltai/mopub-nativead-adapters/blob/master/adapters/src/main/java/org/github/ayltai/mopub/adapter/BaseEventNative.java) and override `onLoadNativeAd(BaseStaticNativeAd)` method and put any ad targeting data to `BaseStaticNativeAd`.
 
 ## Sample Application
 A working example can be found [here](https://github.com/ayltai/mopub-nativead-adapters/tree/master/app)
