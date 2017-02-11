@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function generateTestReports() {
-    ./gradlew -i testDebugUnitTest jacocoTestReport uploadCoverageToCodacy --console=plain
+    ./gradlew -i testDebugUnitTest jacocoTestReport adapters:uploadCoverageToCodacy --console=plain
     cp -r adapters/build/test-results/testDebugUnitTest/debug/*.xml $CIRCLE_TEST_REPORTS && cp -r adapters/build/reports/tests/testDebugUnitTest $CIRCLE_TEST_REPORTS && cp -r adapters/build/reports/jacoco/jacocoTestReport $CIRCLE_TEST_REPORTS
 }
 
