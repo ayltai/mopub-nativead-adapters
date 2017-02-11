@@ -1,0 +1,26 @@
+machine:
+  java:
+    version: oraclejdk8
+  environment:
+    ANDROID_HOME: /usr/local/android-sdk-linux
+dependencies:
+  cache_directories:
+    - /usr/local/android-sdk-linux/build-tools
+    - /usr/local/android-sdk-linux/platforms
+    - /usr/local/android-sdk-linux/system-images
+  pre:
+    - chmod +x gradlew
+  override:
+    - if [ ! -e $ANDROID_HOME/build-tools/25.0.2 ]; then echo y | android update sdk --no-ui --all --filter build-tools-25.0.2; fi
+    - if [ ! -e $ANDROID_HOME/platforms/android-25 ]; then echo y | android update sdk --no-ui --all --filter android-25; fi
+    - echo y | android update sdk --no-ui --all --filter tools,platform-tools,extra-android-m2repository,extra-android-support,extra-google-m2repository,extra-google-google_play_services
+  post:
+    - android list targets
+test:
+  override:
+    - case $CIRCLE_NODE_INDEX in 0) (source scripts/ci-helpers.sh && generateTestReports) ;; 1) (source scripts/ci-helpers.sh && inspectCode) ;; esac;
+        parallel: true
+        timeout: 900
+  post:
+    - case $CIRCLE_NODE_INDEX in 0) (./gradlew adapters:install) ;; 1) (bash <(curl -s https://codecov.io/bash)) ;; esac;
+        parallel: true
