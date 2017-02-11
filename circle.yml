@@ -22,5 +22,5 @@ test:
         parallel: true
         timeout: 900
   post:
-    - case $CIRCLE_NODE_INDEX in 0) (./gradlew adapters:install) ;; 1) (bash <(curl -s https://codecov.io/bash)) ;; esac:
+    - case $CIRCLE_NODE_INDEX in 0) (./gradlew adapters:install) ;; esac:
         parallel: true
