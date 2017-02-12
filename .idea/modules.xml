@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Android-MoPub-NativeAd-Adapters.iml" filepath="$PROJECT_DIR$/Android-MoPub-NativeAd-Adapters.iml" />
       <module fileurl="file://$PROJECT_DIR$/adapters/adapters.iml" filepath="$PROJECT_DIR$/adapters/adapters.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mopub-nativead-adapters.iml" filepath="$PROJECT_DIR$/mopub-nativead-adapters.iml" />

@@ -32,7 +32,7 @@ Add the dependencies to your application project:
 ```groovy
 dependencies {
     ...
-    compile 'com.github.ayltai:mopub-nativead-adapters:1.0.0'
+    compile 'com.github.ayltai:mopub-nativead-adapters:1.0.1'
 }
 ```
 
@@ -249,4 +249,4 @@ You can do it by extending [BaseEventNative](https://github.com/ayltai/mopub-nat
 A working example can be found [here](https://github.com/ayltai/mopub-nativead-adapters/tree/master/app)
 
 ## Requirements
-This library supports Android 3.0 Honeycomb (API 11) or later.
+This library supports Android 4.1 Jelly Bean (API 16) or later.
