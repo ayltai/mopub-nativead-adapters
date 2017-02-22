@@ -46,7 +46,7 @@ dependencies {
     compile 'com.facebook.android:audience-network-sdk:4.19.0'
     compile 'com.flurry.android:analytics:6.8.0'
     compile 'com.flurry.android:ads:6.8.0'
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
+    compile 'com.google.android.gms:play-services-ads:10.2.0'
 
     // Tests
     testCompile 'junit:junit:4.12'
