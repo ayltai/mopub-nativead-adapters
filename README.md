@@ -14,6 +14,12 @@ Custom adapters for [MoPub](http://www.mopub.com) native ads.
 * [AppLovin Native Ads](https://www.applovin.com/developers)
 * [MoPub](http://www.mopub.com) Built-in Native Ads
 
+## Introduction
+This is an Android library ready for most use cases. You can start getting working ads right away. If you want to understand what the implementation behind it, or you simply prefer to create custom adapters from scratch, please follow the instructions in these articles:
+* [A complete guide to MoPub native ads mediation on Android (Part 1)](https://medium.com/@ayltai/a-complete-guide-to-mopub-native-ad-mediation-on-android-e6ecc2afff24)
+* [A complete guide to MoPub native ads mediation on Android (Part 2)](https://medium.com/@ayltai/a-complete-guide-to-mopub-native-ads-mediation-on-android-part-2-1757c05e4815)
+* [A complete guide to MoPub native ads mediation on Android (Part 3)](https://medium.com/@ayltai/a-complete-guide-to-mopub-native-ads-mediation-on-android-part-3-5a50bc935fbd)
+
 ## Gradle
 
 ### Step 1
