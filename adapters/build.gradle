@@ -43,7 +43,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
 
     compile('com.mopub:mopub-sdk-native-static:4.12.0@aar') { transitive = true }
-    compile 'com.facebook.android:audience-network-sdk:4.20.0'
+    compile 'com.facebook.android:audience-network-sdk:4.22.0'
     compile 'com.flurry.android:analytics:6.9.2'
     compile 'com.flurry.android:ads:6.9.2'
     compile 'com.google.android.gms:play-services-ads:10.2.0'
