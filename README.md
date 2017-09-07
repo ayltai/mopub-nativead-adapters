@@ -143,7 +143,7 @@ Then you can enter the following information into the text boxes:
 
 ![Custom Event Class](screenshots/mopub-custom-event-class.png "Custom Event Class")
 
-**Custom Event Class:** `org.github.ayltai.mopub.adapter.FacebookNativeEvent` (or any other `BaseNativeEvent` sub-classes supported by this library). If you have extended this classes, you must specify the exact package and class name accordingly.
+**Custom Event Class:** `org.github.ayltai.mopub.adapter.FacebookEventNative` (or any other `BaseEventNative` sub-classes supported by this library). If you have extended this classes, you must specify the exact package and class name accordingly.
 
 **Custom Event Class Data:** `{"adUnitId":"xxxxxxxxxx_yyyyyyyyyy"}`. Replace it with your Facebook placement ID of your ad (or any other ad unit id you need for your ad network). Note that for some ad network, you may also need to specify `apiKey` in this field. The format is in JSON.
 
